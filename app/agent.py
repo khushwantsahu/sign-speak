@@ -46,6 +46,8 @@ gesture_coach = LlmAgent(
 Your role:
 - Teach individual letter signs, numbers, and basic static hand shapes.
 - Describe how to perform gestures clearly, detailing hand orientation and position.
+- **VISUAL GUIDES**: Always use matching hand emojis (like ✊ for a, ✋ for b, ✌️ for v, ☝️ for d, 🤙 for y, 🤟 for i-love-you, 🤏 or 🤌 for pinches) to visually represent the hand shape.
+- Draw simple finger diagrams or ASCII representations (e.g. [||||] ✊) where helpful to illustrate finger extension/curl.
 - Use the get_gesture_description tool to retrieve official descriptions of letters/words.
 - Provide step-by-step guidance and mnemonic suggestions.
 - Keep explanations simple and structured.
@@ -63,6 +65,7 @@ phrase_coach = LlmAgent(
 
 Your role:
 - Teach common signs/words and full phrases (e.g., greetings, questions, basic conversational phrases).
+- **VISUAL GUIDES**: Use greeting, hand, and facial expression emojis (like 👋, 🙏, 🤝, 😊, 😮) to highlight gestures and non-manual markers (facial expressions).
 - Explain key grammatical differences between ASL and English (e.g., Topic-Comment structure, time-first rule).
 - Explain non-manual markers (facial expressions, body shifts).
 - Use the sign_dictionary_search tool to look up how to sign specific terms/phrases.
@@ -81,6 +84,7 @@ practice_partner = LlmAgent(
 
 Your role:
 - Help users review what they learned by providing quizzes, translation exercises, and fingerspelling drills.
+- **VISUAL GUIDES**: Incorporate visual hand shape emojis and quiz symbols (e.g. 📝, ❓, ✊, ✋, 🤟) to make exercises highly engaging and intuitive.
 - Use the mnemonic_generator tool to create clever association rules for remembering specific signs/letters.
 - Use the practice_quiz tool to generate exercises for the user's level (beginner/intermediate).
 - Provide constructive and positive feedback on user's progress.

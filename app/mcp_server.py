@@ -18,47 +18,47 @@ mcp = FastMCP("sign-speak-mcp")
 # Mini-database of sign descriptions and mnemonics
 SIGN_DATABASE = {
     "a": {
-        "description": "Make a fist with your dominant hand. Keep your fingers curled tightly into your palm, and place your thumb straight up against the side of your index finger.",
+        "description": "Make a fist with your dominant hand. Keep your fingers curled tightly into your palm, and place your thumb straight up against the side of your index finger. ✊",
         "mnemonic": "Imagine your thumb is a flagpole resting against a closed building (fist).",
         "category": "alphabet",
     },
     "b": {
-        "description": "Open your hand with all four fingers pointing straight up, pressed close together. Tuck your thumb across your palm, resting near the base of your little finger.",
+        "description": "Open your hand with all four fingers pointing straight up, pressed close together. Tuck your thumb across your palm, resting near the base of your little finger. ✋",
         "mnemonic": "Think of a flat wall (4 fingers up) with a closed door latch (thumb tucked). Looks like a capital 'B' if you squint!",
         "category": "alphabet",
     },
     "c": {
-        "description": "Curve your four fingers and thumb into a C-shape. Your palm faces to the side, and your hand looks like the letter 'C' from the side view.",
+        "description": "Curve your four fingers and thumb into a C-shape. Your palm faces to the side, and your hand looks like the letter 'C' from the side view. 🫴",
         "mnemonic": "Simply form the shape of the letter 'C' with your hand.",
         "category": "alphabet",
     },
     "hello": {
-        "description": "Bring your dominant hand up near your forehead, palm facing down and slightly out. Move the hand outward and slightly down, similar to a military salute but friendlier.",
+        "description": "Bring your dominant hand up near your forehead, palm facing down and slightly out. Move the hand outward and slightly down, similar to a military salute but friendlier. 👋",
         "mnemonic": "A polite forehead salute to greet someone.",
         "category": "greetings",
     },
     "thank you": {
-        "description": "Touch the fingertips of your open dominant hand to your chin. Move your hand outward and down toward the person you are thanking, palm facing up.",
+        "description": "Touch the fingertips of your open dominant hand to your chin. Move your hand outward and down toward the person you are thanking, palm facing up. 🫴",
         "mnemonic": "Sending a warm kiss or appreciation from your chin directly to the other person.",
         "category": "greetings",
     },
     "please": {
-        "description": "Place your flat dominant hand on the center of your chest. Move your hand in a circular motion clockwise (from your right to left, up, and around) several times.",
+        "description": "Place your flat dominant hand on the center of your chest. Move your hand in a circular motion clockwise (from your right to left, up, and around) several times. 🫱",
         "mnemonic": "Polishing your heart to show you are sincere and polite.",
         "category": "greetings",
     },
     "family": {
-        "description": "Form 'F' hands (thumb and index finger touching in a circle, other three fingers up) with both hands. Start with your thumbs/index fingers touching in front of you, then circle both hands outward and back until your pinky fingers touch.",
+        "description": "Form 'F' hands (thumb and index finger touching in a circle, other three fingers up) with both hands. Start with your thumbs/index fingers touching in front of you, then circle both hands outward and back until your pinky fingers touch. 👪",
         "mnemonic": "Creating a circle of 'F' (Family) members starting from the center out.",
         "category": "nouns",
     },
     "friend": {
-        "description": "Hook your dominant index finger over your non-dominant index finger. Then reverse the gesture, hooking your non-dominant index finger over your non-dominant index finger.",
+        "description": "Hook your dominant index finger over your non-dominant index finger. Then reverse the gesture, hooking your non-dominant index finger over your non-dominant index finger. 🤞",
         "mnemonic": "Two fingers locking together in a strong hug of mutual trust.",
         "category": "nouns",
     },
     "help": {
-        "description": "Place your closed non-dominant hand flat, palm facing up. Place your dominant hand in a fist with thumb up (like a thumbs-up) on top of the flat palm. Lift both hands up together.",
+        "description": "Place your closed non-dominant hand flat, palm facing up. Place your dominant hand in a fist with thumb up (like a thumbs-up) on top of the flat palm. Lift both hands up together. 👍 flat on 🫱",
         "mnemonic": "Your flat hand is a platform lifting up and supporting (helping) the other hand.",
         "category": "verbs",
     },
