@@ -1,21 +1,22 @@
-"""
-sign-speak MCP Server
-Sign-language domain tools exposed via MCP stdio transport.
-
-Tools:
-  1. get_gesture_description - Steps to perform a sign/gesture for a specific letter/word
-  2. sign_dictionary_search - Search the sign language dictionary
-  3. mnemonic_generator     - Generate a memory aid mnemonic for a sign
-  4. practice_quiz          - Generate practice quizzes and exercises
-"""
-
-from __future__ import annotations
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 from mcp.server.fastmcp import FastMCP
 
 mcp = FastMCP("sign-speak-mcp")
 
-# Mini-database of sign descriptions and mnemonics
+# Complete database of ASL alphabet (A-Z) and basic vocabulary
 SIGN_DATABASE = {
     "a": {
         "description": "Make a fist with your dominant hand. Keep your fingers curled tightly into your palm, and place your thumb straight up against the side of your index finger. ✊",
@@ -26,7 +27,7 @@ SIGN_DATABASE = {
     },
     "b": {
         "description": "Open your hand with all four fingers pointing straight up, pressed close together. Tuck your thumb across your palm, resting near the base of your little finger. ✋",
-        "mnemonic": "Think of a flat wall (4 fingers up) with a closed door latch (thumb tucked). Looks like a capital 'B' if you squint!",
+        "mnemonic": "Think of a flat wall (4 fingers up) with a closed door latch (thumb tucked).",
         "category": "alphabet",
         "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/b.png?v=3\" alt=\"Gesture B\" width=\"320\" />",
         "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
@@ -38,6 +39,167 @@ SIGN_DATABASE = {
         "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/c.png?v=3\" alt=\"Gesture C\" width=\"320\" />",
         "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
     },
+    "d": {
+        "description": "Point your index finger straight up. Touch the tips of your thumb, middle, ring, and pinky fingers together to form a circle in front of it. ☝️",
+        "mnemonic": "An index finger pointing up, looking like the stem of a lowercase 'd'.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/d.png?v=3\" alt=\"Gesture D\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "e": {
+        "description": "Curl all four fingers tightly down so their tips rest on top of your thumb, which is folded across your palm. ✊",
+        "mnemonic": "An enclosed fist where fingers curl tightly, resembling the curves of an 'E'.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/e.png?v=3\" alt=\"Gesture E\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "f": {
+        "description": "Touch the tip of your index finger and thumb together to form a circle. Extend your middle, ring, and pinky fingers straight up and spread them apart. 👌",
+        "mnemonic": "Like the 'OK' sign, with three fingers standing up representing 'F'.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/f.png?v=3\" alt=\"Gesture F\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "g": {
+        "description": "Extend your index finger and thumb horizontally, parallel to each other, pointing out to the side with a small gap between them. 🤏",
+        "mnemonic": "Like you are indicating a tiny amount or preparing to pinch something horizontally.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/g.png?v=3\" alt=\"Gesture G\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "h": {
+        "description": "Extend your index and middle fingers straight out horizontally, pressed close together. Tuck your thumb, ring, and pinky fingers into your palm. 🫵",
+        "mnemonic": "Pointing two fingers horizontally to the side to form the crossbar of 'H'.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/h.png?v=3\" alt=\"Gesture H\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "i": {
+        "description": "Make a fist with your dominant hand, but extend your pinky finger straight up. Keep your thumb tucked across your curled fingers. 🤙",
+        "mnemonic": "A single thin pinky finger standing up like the letter 'i'.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/i.png?v=3\" alt=\"Gesture I\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "j": {
+        "description": "Extend your pinky finger straight up (like letter 'I') and trace the shape of a 'J' curve in the air, swooping down and up. 🤙",
+        "mnemonic": "Drawing the curved tail of the letter 'J' using your pinky.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/j.png?v=3\" alt=\"Gesture J\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "k": {
+        "description": "Extend your index and middle fingers straight up in a 'V' shape. Place your thumb upright so it touches the middle joint of your index finger. ✌️",
+        "mnemonic": "Like a peace sign, but the thumb is tucked upright against the index finger.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/k.png?v=3\" alt=\"Gesture K\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "l": {
+        "description": "Extend your index finger straight up and your thumb straight out to the side horizontally, forming an 'L' shape. Curl your other fingers. ☝️",
+        "mnemonic": "Your hand literally forms the shape of a capital 'L'.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/l.png?v=3\" alt=\"Gesture L\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "m": {
+        "description": "Fold your thumb across your palm, and tuck it under your index, middle, and ring fingers. Curl those three fingers down over your thumb. ✊",
+        "mnemonic": "Three humps of fingers (index, middle, ring) resting over the thumb, like the letter 'M'.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/m.png?v=3\" alt=\"Gesture M\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "n": {
+        "description": "Fold your thumb across your palm, and tuck it under your index and middle fingers. Curl those two fingers down over your thumb. ✊",
+        "mnemonic": "Two humps of fingers (index, middle) resting over the thumb, like the letter 'N'.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/n.png?v=3\" alt=\"Gesture N\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "o": {
+        "description": "Curve all four fingers and your thumb together so their tips touch, forming a clear circle shape. 👌",
+        "mnemonic": "Forming the shape of the letter 'O' with your whole hand.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/o.png?v=3\" alt=\"Gesture O\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "p": {
+        "description": "Point your index finger straight out and your middle finger downward. Place your thumb against the middle joint of your middle finger (downward 'K'). ✌️",
+        "mnemonic": "Like a downward-pointing 'K' shape.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/p.png?v=3\" alt=\"Gesture P\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "q": {
+        "description": "Point your index finger and thumb straight down, keeping a small gap between them, resembling a downward 'G'. 🤏",
+        "mnemonic": "Like a downward-pointing pinch gesture.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/q.png?v=3\" alt=\"Gesture Q\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "r": {
+        "description": "Extend your index and middle fingers straight up, crossing your middle finger closely behind your index finger. ✌️",
+        "mnemonic": "Crossing your fingers for good luck.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/r.png?v=3\" alt=\"Gesture R\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "s": {
+        "description": "Make a tight fist with your dominant hand, and place your thumb folded across the front of all four fingers. ✊",
+        "mnemonic": "A standard tight fist, with the thumb wrapping over the fingers.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/s.png?v=3\" alt=\"Gesture S\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "t": {
+        "description": "Make a fist, but tuck your thumb upright between your index and middle fingers. ✊",
+        "mnemonic": "Your thumb is locked in a box, peeking out between the first two fingers.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/t.png?v=3\" alt=\"Gesture T\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "u": {
+        "description": "Extend your index and middle fingers straight up, pressed close together. Curl your other fingers and thumb. ✌️",
+        "mnemonic": "Two fingers standing up together, forming the two sides of 'U'.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/u.png?v=3\" alt=\"Gesture U\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "v": {
+        "description": "Extend your index and middle fingers straight up, spread apart in a 'V' shape. Curl your other fingers. ✌️",
+        "mnemonic": "A peace sign, representing the letter 'V'.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/v.png?v=3\" alt=\"Gesture V\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "w": {
+        "description": "Extend your index, middle, and ring fingers straight up, spread apart. Touch the tips of your thumb and pinky together. 🖐️",
+        "mnemonic": "Three extended fingers forming the three peaks of a 'W'.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/w.png?v=3\" alt=\"Gesture W\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "x": {
+        "description": "Make a fist, but extend your index finger straight up and bend it at the joints to form a hook shape. ☝️",
+        "mnemonic": "Like a pirate's hook, representing 'X' marks the spot.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/x.png?v=3\" alt=\"Gesture X\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "y": {
+        "description": "Extend your thumb and pinky finger straight out, keeping your index, middle, and ring fingers folded flat. 🤙",
+        "mnemonic": "Like the 'hang loose' hand gesture.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/y.png?v=3\" alt=\"Gesture Y\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
+    "z": {
+        "description": "Point your index finger straight up and trace the shape of the letter 'Z' in the air in front of you. ☝️",
+        "mnemonic": "Simply write the letter 'Z' in the air with your pointer finger.",
+        "category": "alphabet",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/z.png?v=3\" alt=\"Gesture Z\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
+    },
     "hello": {
         "description": "Bring your dominant hand up near your forehead, palm facing down and slightly out. Move the hand outward and slightly down, similar to a military salute but friendlier. 👋",
         "mnemonic": "A polite forehead salute to greet someone.",
@@ -46,7 +208,7 @@ SIGN_DATABASE = {
     },
     "thank you": {
         "description": "Touch the fingertips of your open dominant hand to your chin. Move your hand outward and down toward the person you are thanking, palm facing up. 🫴",
-        "mnemonic": "Sending a warm kiss or appreciation from your chin directly to the other person.",
+        "mnemonic": "Sending a warm appreciation from your chin directly to the other person.",
         "category": "greetings",
         "video_link": "https://www.youtube.com/watch?v=0FcwzMq4iWo",
     },
@@ -220,12 +382,6 @@ async def practice_quiz(difficulty: str, category: str = "general") -> str:
             "3. How do you show a yes/no question using your eyebrows in ASL?\n\n"
             "--- ANSWER KEY ---\n"
             "1. At the beginning of the sentence (time-first rule).\n"
-            "2. English uses Subject-Verb-Object (e.g. 'I bought a car'). ASL often uses Topic-Comment (e.g., 'Car, I bought').\n"
-            "3. Raise your eyebrows and lean slightly forward."
+            "2. English uses Subject-Verb-Object (SVO), while ASL often uses Topic-Comment structure where the topic is introduced first, followed by the comment or action.\n"
+            "3. Raise your eyebrows and lean your head slightly forward."
         )
-
-def main() -> None:
-    mcp.run()
-
-if __name__ == "__main__":
-    main()
