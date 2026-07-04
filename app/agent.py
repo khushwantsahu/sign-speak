@@ -284,6 +284,57 @@ async def security_blocked_output(ctx: Context, node_input: Any) -> AsyncGenerat
     yield
 
 # ─────────────────────────────────────────────────────────
+# Visual Renderer Node
+# ─────────────────────────────────────────────────────────
+
+@node
+async def visual_renderer(ctx: Context, node_input: Any) -> AsyncGenerator[Any, None]:
+    """Replaces placeholders like [VISUAL: a] and [VIDEO: alphabet] with base64 img tags and YouTube links."""
+    import re
+    from app.visual_assets import VISUALS
+
+    text = ""
+    if isinstance(node_input, str):
+        text = node_input
+    elif hasattr(node_input, "text"):
+        text = node_input.text
+    else:
+        text = ctx.state.get("final_response", "")
+
+    # 1. Replace [VISUAL: x] placeholders with base64 image tags
+    def replace_visual(match):
+        char = match.group(1).lower()
+        if char in VISUALS:
+            return f'<img src="data:image/png;base64,{VISUALS[char]}" alt="Gesture {char.upper()}" width="320" />'
+        return f"[Visual for '{char.upper()}' missing]"
+
+    text = re.sub(r"\[VISUAL:\s*([a-zA-Z])\]", replace_visual, text)
+
+    # 2. Replace [VIDEO: x] placeholders with YouTube links
+    def replace_video(match):
+        cat = match.group(1).lower()
+        if cat == "alphabet":
+            return "[Watch ASL Alphabet Tutorial on YouTube](https://www.youtube.com/watch?v=ianCxd71xzA)"
+        elif cat == "greetings":
+            return "[Watch Basic ASL Greetings Tutorial on YouTube](https://www.youtube.com/watch?v=0FcwzMq4iWo)"
+        return "[Video Link]"
+
+    text = re.sub(r"\[VIDEO:\s*([a-zA-Z]+)\]", replace_video, text)
+
+    # 3. Always append a general YouTube video reference at the end of tutor sessions
+    general_links = (
+        "\n\n---\n"
+        "📺 **ASL Learning Resources:**\n"
+        "- Learn fingerspelling: [ASL Alphabet Tutorial on YouTube](https://www.youtube.com/watch?v=ianCxd71xzA)\n"
+        "- Learn greetings: [Basic ASL Greetings Tutorial on YouTube](https://www.youtube.com/watch?v=0FcwzMq4iWo)"
+    )
+    if "Watch ASL Alphabet" not in text and "Watch Basic ASL Greetings" not in text and "ASL Learning Resources" not in text:
+        text += general_links
+
+    ctx.state["final_response"] = text
+    yield text
+
+# ─────────────────────────────────────────────────────────
 # Workflow Graph
 # ─────────────────────────────────────────────────────────
 
@@ -294,6 +345,7 @@ root_agent = Workflow(
         ("START", security_checkpoint),
         (security_checkpoint, {"SECURITY_EVENT": security_blocked_output, "ok": topic_collector}),
         (topic_collector, sign_orchestrator),
+        (sign_orchestrator, visual_renderer),
     ],
 )
 
