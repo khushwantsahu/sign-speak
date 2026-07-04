@@ -21,19 +21,19 @@ SIGN_DATABASE = {
         "description": "Make a fist with your dominant hand. Keep your fingers curled tightly into your palm, and place your thumb straight up against the side of your index finger. ✊",
         "mnemonic": "Imagine your thumb is a flagpole resting against a closed building (fist).",
         "category": "alphabet",
-        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/a.png\" alt=\"Gesture A\" width=\"320\" />",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/a.png?v=3\" alt=\"Gesture A\" width=\"320\" />",
     },
     "b": {
         "description": "Open your hand with all four fingers pointing straight up, pressed close together. Tuck your thumb across your palm, resting near the base of your little finger. ✋",
         "mnemonic": "Think of a flat wall (4 fingers up) with a closed door latch (thumb tucked). Looks like a capital 'B' if you squint!",
         "category": "alphabet",
-        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/b.png\" alt=\"Gesture B\" width=\"320\" />",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/b.png?v=3\" alt=\"Gesture B\" width=\"320\" />",
     },
     "c": {
         "description": "Curve your four fingers and thumb into a C-shape. Your palm faces to the side, and your hand looks like the letter 'C' from the side view. 🫴",
         "mnemonic": "Simply form the shape of the letter 'C' with your hand.",
         "category": "alphabet",
-        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/c.png\" alt=\"Gesture C\" width=\"320\" />",
+        "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/c.png?v=3\" alt=\"Gesture C\" width=\"320\" />",
     },
     "hello": {
         "description": "Bring your dominant hand up near your forehead, palm facing down and slightly out. Move the hand outward and slightly down, similar to a military salute but friendlier. 👋",
