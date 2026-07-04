@@ -22,48 +22,57 @@ SIGN_DATABASE = {
         "mnemonic": "Imagine your thumb is a flagpole resting against a closed building (fist).",
         "category": "alphabet",
         "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/a.png?v=3\" alt=\"Gesture A\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
     },
     "b": {
         "description": "Open your hand with all four fingers pointing straight up, pressed close together. Tuck your thumb across your palm, resting near the base of your little finger. ✋",
         "mnemonic": "Think of a flat wall (4 fingers up) with a closed door latch (thumb tucked). Looks like a capital 'B' if you squint!",
         "category": "alphabet",
         "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/b.png?v=3\" alt=\"Gesture B\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
     },
     "c": {
         "description": "Curve your four fingers and thumb into a C-shape. Your palm faces to the side, and your hand looks like the letter 'C' from the side view. 🫴",
         "mnemonic": "Simply form the shape of the letter 'C' with your hand.",
         "category": "alphabet",
         "visual": "<img src=\"https://raw.githubusercontent.com/khushwantsahu/sign-speak/main/assets/gestures/c.png?v=3\" alt=\"Gesture C\" width=\"320\" />",
+        "video_link": "https://www.youtube.com/watch?v=ianCxd71xzA",
     },
     "hello": {
         "description": "Bring your dominant hand up near your forehead, palm facing down and slightly out. Move the hand outward and slightly down, similar to a military salute but friendlier. 👋",
         "mnemonic": "A polite forehead salute to greet someone.",
         "category": "greetings",
+        "video_link": "https://www.youtube.com/watch?v=0FcwzMq4iWo",
     },
     "thank you": {
         "description": "Touch the fingertips of your open dominant hand to your chin. Move your hand outward and down toward the person you are thanking, palm facing up. 🫴",
         "mnemonic": "Sending a warm kiss or appreciation from your chin directly to the other person.",
         "category": "greetings",
+        "video_link": "https://www.youtube.com/watch?v=0FcwzMq4iWo",
     },
     "please": {
         "description": "Place your flat dominant hand on the center of your chest. Move your hand in a circular motion clockwise (from your right to left, up, and around) several times. 🫱",
         "mnemonic": "Polishing your heart to show you are sincere and polite.",
         "category": "greetings",
+        "video_link": "https://www.youtube.com/watch?v=0FcwzMq4iWo",
     },
     "family": {
         "description": "Form 'F' hands (thumb and index finger touching in a circle, other three fingers up) with both hands. Start with your thumbs/index fingers touching in front of you, then circle both hands outward and back until your pinky fingers touch. 👪",
         "mnemonic": "Creating a circle of 'F' (Family) members starting from the center out.",
         "category": "nouns",
+        "video_link": "https://www.youtube.com/watch?v=0FcwzMq4iWo",
     },
     "friend": {
         "description": "Hook your dominant index finger over your non-dominant index finger. Then reverse the gesture, hooking your non-dominant index finger over your non-dominant index finger. 🤞",
         "mnemonic": "Two fingers locking together in a strong hug of mutual trust.",
         "category": "nouns",
+        "video_link": "https://www.youtube.com/watch?v=0FcwzMq4iWo",
     },
     "help": {
         "description": "Place your closed non-dominant hand flat, palm facing up. Place your dominant hand in a fist with thumb up (like a thumbs-up) on top of the flat palm. Lift both hands up together. 👍 flat on 🫱",
         "mnemonic": "Your flat hand is a platform lifting up and supporting (helping) the other hand.",
         "category": "verbs",
+        "video_link": "https://www.youtube.com/watch?v=0FcwzMq4iWo",
     },
 }
 
@@ -84,9 +93,10 @@ async def get_gesture_description(term: str) -> str:
     if clean_term in SIGN_DATABASE:
         data = SIGN_DATABASE[clean_term]
         visual_str = f"\n\n**Visual Reference:**\n{data['visual']}" if "visual" in data else ""
+        video_str = f"\n\n📺 **Video Tutorial:** [Watch ASL Tutorial on YouTube]({data['video_link']})" if "video_link" in data else ""
         return (
             f"🤟 **Sign Description for '{term.upper()}'** ({data['category']}):\n"
-            f"{data['description']}{visual_str}"
+            f"{data['description']}{visual_str}{video_str}"
         )
     else:
         return (
