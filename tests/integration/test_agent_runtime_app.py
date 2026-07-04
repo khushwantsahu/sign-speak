@@ -29,6 +29,8 @@ def agent_app(monkeypatch: pytest.MonkeyPatch) -> AgentEngineApp:
     from app.agent_runtime_app import agent_runtime
 
     agent_runtime.set_up()
+    # Reset to False since set_up overrides it to "1"
+    monkeypatch.setenv("GOOGLE_GENAI_USE_VERTEXAI", "False")
     return agent_runtime
 
 
@@ -39,7 +41,7 @@ async def test_agent_stream_query(agent_app: AgentEngineApp) -> None:
     Tests that the agent returns valid streaming responses.
     """
     # Create message and events for the async_stream_query
-    message = "Hi!"
+    message = "Can you teach me how to sign thank you?"
     events = []
     async for event in agent_app.async_stream_query(message=message, user_id="test"):
         events.append(event)
