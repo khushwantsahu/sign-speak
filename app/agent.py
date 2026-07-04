@@ -102,10 +102,10 @@ Always end with a specific daily challenge or short practice drill.
 # Model Output Callback (Replaces placeholders with dev-ui URLs)
 # ─────────────────────────────────────────────────────────
 
-async def orchestrator_after_model(ctx: Any, response: LlmResponse) -> LlmResponse:
+async def orchestrator_after_model(callback_context: Any, llm_response: LlmResponse) -> LlmResponse:
     """Post-processes the orchestrator model response to replace placeholders with relative local image URLs."""
-    if response.content and response.content.parts:
-        for part in response.content.parts:
+    if llm_response.content and llm_response.content.parts:
+        for part in llm_response.content.parts:
             if part.text:
                 text = part.text
 
@@ -138,7 +138,7 @@ async def orchestrator_after_model(ctx: Any, response: LlmResponse) -> LlmRespon
                     text += general_links
 
                 part.text = text
-    return response
+    return llm_response
 
 # ─────────────────────────────────────────────────────────
 # Orchestrator (delegates to specialist sub-agents via AgentTool)
