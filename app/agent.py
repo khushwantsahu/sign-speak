@@ -301,12 +301,11 @@ async def visual_renderer(ctx: Context, node_input: Any) -> AsyncGenerator[Any, 
     else:
         text = ctx.state.get("final_response", "")
 
-    # 1. Replace [VISUAL: x] placeholders with base64 image tags
+    # 1. Replace [VISUAL: x] placeholders with local relative URL image tags
     def replace_visual(match):
         char = match.group(1).lower()
-        if char in VISUALS:
-            return f'<img src="data:image/png;base64,{VISUALS[char]}" alt="Gesture {char.upper()}" width="320" />'
-        return f"[Visual for '{char.upper()}' missing]"
+        # Since we copied all 26 letters to the browser assets folder, they are available under /dev-ui/assets/gestures/
+        return f'<img src="/dev-ui/assets/gestures/{char}.png?v=3" alt="Gesture {char.upper()}" width="320" />'
 
     text = re.sub(r"\[VISUAL:\s*([a-zA-Z])\]", replace_visual, text)
 
