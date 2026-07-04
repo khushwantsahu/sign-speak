@@ -19,6 +19,7 @@ from google.adk.tools.mcp_tool.mcp_toolset import McpToolset, StdioConnectionPar
 from google.adk.workflow import START, node
 
 from google.adk.apps import App
+from google.adk.models.llm_response import LlmResponse
 
 from .config import config
 
@@ -98,6 +99,48 @@ Always end with a specific daily challenge or short practice drill.
 )
 
 # ─────────────────────────────────────────────────────────
+# Model Output Callback (Replaces placeholders with dev-ui URLs)
+# ─────────────────────────────────────────────────────────
+
+async def orchestrator_after_model(ctx: Any, response: LlmResponse) -> LlmResponse:
+    """Post-processes the orchestrator model response to replace placeholders with relative local image URLs."""
+    if response.content and response.content.parts:
+        for part in response.content.parts:
+            if part.text:
+                text = part.text
+
+                # 1. Replace [VISUAL: x] placeholders with local relative URL image tags
+                def replace_visual(match):
+                    char = match.group(1).lower()
+                    return f'<img src="/dev-ui/assets/gestures/{char}.png?v=3" alt="Gesture {char.upper()}" width="320" />'
+
+                text = re.sub(r"\[VISUAL:\s*([a-zA-Z])\]", replace_visual, text)
+
+                # 2. Replace [VIDEO: x] placeholders with YouTube links
+                def replace_video(match):
+                    cat = match.group(1).lower()
+                    if cat == "alphabet":
+                        return "[Watch ASL Alphabet Tutorial on YouTube](https://www.youtube.com/watch?v=ianCxd71xzA)"
+                    elif cat == "greetings":
+                        return "[Watch Basic ASL Greetings Tutorial on YouTube](https://www.youtube.com/watch?v=0FcwzMq4iWo)"
+                    return "[Video Link]"
+
+                text = re.sub(r"\[VIDEO:\s*([a-zA-Z]+)\]", replace_video, text)
+
+                # 3. Always append a general YouTube video reference at the end of tutor sessions
+                general_links = (
+                    "\n\n---\n"
+                    "📺 **ASL Learning Resources:**\n"
+                    "- Learn fingerspelling: [ASL Alphabet Tutorial on YouTube](https://www.youtube.com/watch?v=ianCxd71xzA)\n"
+                    "- Learn greetings: [Basic ASL Greetings Tutorial on YouTube](https://www.youtube.com/watch?v=0FcwzMq4iWo)"
+                )
+                if "Watch ASL Alphabet" not in text and "Watch Basic ASL Greetings" not in text and "ASL Learning Resources" not in text:
+                    text += general_links
+
+                part.text = text
+    return response
+
+# ─────────────────────────────────────────────────────────
 # Orchestrator (delegates to specialist sub-agents via AgentTool)
 # ─────────────────────────────────────────────────────────
 
@@ -125,6 +168,7 @@ IMPORTANT: Always use the specialist sub-agent tools to construct the final resp
         AgentTool(agent=phrase_coach),
         AgentTool(agent=practice_partner),
     ],
+    after_model_callback=orchestrator_after_model,
 )
 
 # ─────────────────────────────────────────────────────────
@@ -284,56 +328,6 @@ async def security_blocked_output(ctx: Context, node_input: Any) -> AsyncGenerat
     yield
 
 # ─────────────────────────────────────────────────────────
-# Visual Renderer Node
-# ─────────────────────────────────────────────────────────
-
-@node
-async def visual_renderer(ctx: Context, node_input: Any) -> AsyncGenerator[Any, None]:
-    """Replaces placeholders like [VISUAL: a] and [VIDEO: alphabet] with base64 img tags and YouTube links."""
-    import re
-    from app.visual_assets import VISUALS
-
-    text = ""
-    if isinstance(node_input, str):
-        text = node_input
-    elif hasattr(node_input, "text"):
-        text = node_input.text
-    else:
-        text = ctx.state.get("final_response", "")
-
-    # 1. Replace [VISUAL: x] placeholders with local relative URL image tags
-    def replace_visual(match):
-        char = match.group(1).lower()
-        # Since we copied all 26 letters to the browser assets folder, they are available under /dev-ui/assets/gestures/
-        return f'<img src="/dev-ui/assets/gestures/{char}.png?v=3" alt="Gesture {char.upper()}" width="320" />'
-
-    text = re.sub(r"\[VISUAL:\s*([a-zA-Z])\]", replace_visual, text)
-
-    # 2. Replace [VIDEO: x] placeholders with YouTube links
-    def replace_video(match):
-        cat = match.group(1).lower()
-        if cat == "alphabet":
-            return "[Watch ASL Alphabet Tutorial on YouTube](https://www.youtube.com/watch?v=ianCxd71xzA)"
-        elif cat == "greetings":
-            return "[Watch Basic ASL Greetings Tutorial on YouTube](https://www.youtube.com/watch?v=0FcwzMq4iWo)"
-        return "[Video Link]"
-
-    text = re.sub(r"\[VIDEO:\s*([a-zA-Z]+)\]", replace_video, text)
-
-    # 3. Always append a general YouTube video reference at the end of tutor sessions
-    general_links = (
-        "\n\n---\n"
-        "📺 **ASL Learning Resources:**\n"
-        "- Learn fingerspelling: [ASL Alphabet Tutorial on YouTube](https://www.youtube.com/watch?v=ianCxd71xzA)\n"
-        "- Learn greetings: [Basic ASL Greetings Tutorial on YouTube](https://www.youtube.com/watch?v=0FcwzMq4iWo)"
-    )
-    if "Watch ASL Alphabet" not in text and "Watch Basic ASL Greetings" not in text and "ASL Learning Resources" not in text:
-        text += general_links
-
-    ctx.state["final_response"] = text
-    yield text
-
-# ─────────────────────────────────────────────────────────
 # Workflow Graph
 # ─────────────────────────────────────────────────────────
 
@@ -344,7 +338,6 @@ root_agent = Workflow(
         ("START", security_checkpoint),
         (security_checkpoint, {"SECURITY_EVENT": security_blocked_output, "ok": topic_collector}),
         (topic_collector, sign_orchestrator),
-        (sign_orchestrator, visual_renderer),
     ],
 )
 
