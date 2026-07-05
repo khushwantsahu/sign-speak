@@ -112,7 +112,7 @@ async def orchestrator_after_model(callback_context: Any, llm_response: LlmRespo
                 # 1. Replace [VISUAL: x] placeholders with local relative URL image tags
                 def replace_visual(match):
                     char = match.group(1).lower()
-                    return f'<img src="/dev-ui/assets/gestures/{char}.png?v=3" alt="Gesture {char.upper()}" width="320" />'
+                    return f'<img src="/dev-ui/assets/gestures/{char}.png?v=4" alt="Gesture {char.upper()}" width="320" />'
 
                 text = re.sub(r"\[VISUAL:\s*([a-zA-Z])\]", replace_visual, text)
 
