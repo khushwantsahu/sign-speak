@@ -14,7 +14,7 @@ graph TD
 
     START --> SC[security_checkpoint]:::security
     SC -- "SECURITY_EVENT" --> SBO[security_blocked_output]:::security
-    SC -- "ok" --> TC[topic_collector (HITL)]:::hitl
+    SC -- "ok" --> TC["topic_collector (HITL)"]:::hitl
     TC --> SO[sign_orchestrator]:::agent
     
     SO --> |AgentTool| GC[gesture_coach]:::agent

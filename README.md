@@ -36,7 +36,7 @@ graph TD
 
     START --> SC[security_checkpoint]:::security
     SC -- "SECURITY_EVENT" --> SBO[security_blocked_output]:::security
-    SC -- "ok" --> TC[topic_collector (HITL)]:::hitl
+    SC -- "ok" --> TC["topic_collector (HITL)"]:::hitl
     TC --> SO[sign_orchestrator]:::agent
     
     SO --> |AgentTool| GC[gesture_coach]:::agent
@@ -102,7 +102,7 @@ graph TD
    git add .
    git commit -m "Initial commit: sign-speak ADK agent"
    git branch -M main
-   git remote add origin https://github.com/<your-username>/sign-speak.git
+   git remote add origin https://github.com/khushwantsahu/sign-speak.git
    git push -u origin main
    ```
 
