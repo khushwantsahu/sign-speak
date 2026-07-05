@@ -120,9 +120,9 @@ async def orchestrator_after_model(callback_context: Any, llm_response: LlmRespo
                 def replace_video(match):
                     cat = match.group(1).lower()
                     if cat == "alphabet":
-                        return "[Watch ASL Alphabet Tutorial on YouTube](https://www.youtube.com/watch?v=ianCxd71xzA)"
+                        return "[Watch ASL Alphabet Tutorial on YouTube](https://youtu.be/DBQINq0SsAw?si=3ntFCnundSnw3lun)"
                     elif cat == "greetings":
-                        return "[Watch Basic ASL Greetings Tutorial on YouTube](https://www.youtube.com/watch?v=0FcwzMq4iWo)"
+                        return "[Watch Basic ASL Greetings Tutorial on YouTube](https://youtu.be/0FcwzMq4iWo?si=XiIw1bR-WP56MKz7)"
                     return "[Video Link]"
 
                 text = re.sub(r"\[VIDEO:\s*([a-zA-Z]+)\]", replace_video, text)
@@ -131,8 +131,9 @@ async def orchestrator_after_model(callback_context: Any, llm_response: LlmRespo
                 general_links = (
                     "\n\n---\n"
                     "📺 **ASL Learning Resources:**\n"
-                    "- Learn fingerspelling: [ASL Alphabet Tutorial on YouTube](https://www.youtube.com/watch?v=ianCxd71xzA)\n"
-                    "- Learn greetings: [Basic ASL Greetings Tutorial on YouTube](https://www.youtube.com/watch?v=0FcwzMq4iWo)"
+                    "- Learn fingerspelling: [ASL Alphabet Tutorial on YouTube](https://youtu.be/DBQINq0SsAw?si=3ntFCnundSnw3lun)\n"
+                    "- Learn greetings: [Basic ASL Greetings Tutorial on YouTube](https://youtu.be/0FcwzMq4iWo?si=XiIw1bR-WP56MKz7)\n"
+                    "- General ASL learning: [ASL Basics for Beginners on YouTube](https://youtu.be/Y4stD_ypaAI?si=HzdXUYmaR-iss2HW)"
                 )
                 if "Watch ASL Alphabet" not in text and "Watch Basic ASL Greetings" not in text and "ASL Learning Resources" not in text:
                     text += general_links
